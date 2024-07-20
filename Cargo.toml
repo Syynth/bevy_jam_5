@@ -5,7 +5,16 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+avian = "0.0.0"
 bevy = { version = "0.14", features = ["wayland"] }
+bevy-inspector-egui = "0.25.1"
+bevy_asset_loader = "0.21.0"
+bevy_common_assets = "0.11.0"
+bevy_egui = "0.28.0"
+bevy_mod_debugdump = "0.11.0"
+bevy_mod_picking = "0.20.1"
+iyes_progress = "0.12.0"
+leafwing-input-manager = "0.14.0"
 # Disable low-severity logs at compile time for performance.
 log = { version = "0.4", features = [
     "max_level_debug",
