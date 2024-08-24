@@ -10,9 +10,12 @@ bevy = { version = "0.14", features = ["wayland"] }
 bevy-inspector-egui = "0.25.1"
 bevy_asset_loader = "0.21.0"
 bevy_common_assets = "0.11.0"
+bevy_ecs_tilemap = "0.14.0"
 bevy_egui = "0.28.0"
 bevy_mod_debugdump = "0.11.0"
 bevy_mod_picking = "0.20.1"
+bevy_prng = { version = "0.7.1", features = ["rand_chacha", "wyrand"] }
+bevy_rand = { version = "0.7.1", features = ["rand_chacha", "wyrand"] }
 iyes_progress = "0.12.0"
 leafwing-input-manager = "0.14.0"
 # Disable low-severity logs at compile time for performance.
@@ -21,6 +24,7 @@ log = { version = "0.4", features = [
     "release_max_level_warn",
 ] }
 rand = "0.8"
+rand_core = "0.6.4"
 
 [features]
 default = [
