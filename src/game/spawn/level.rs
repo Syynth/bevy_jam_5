@@ -1,11 +1,18 @@
 //! Spawn the main level by triggering other observers.
 
 use bevy::prelude::*;
+use bevy_pancam::PanCamPlugin;
 
-use super::{player::SpawnPlayer, tilemap::SpawnRandomTilemap};
+use crate::game::town::{Town, TownType};
+
+use super::{
+    // player::SpawnPlayer,
+    tilemap::SpawnRandomTilemap,
+};
 
 pub(super) fn plugin(app: &mut App) {
     app.observe(spawn_level);
+    app.add_plugins(PanCamPlugin::default());
 }
 
 #[derive(Event, Debug)]
@@ -16,7 +23,6 @@ fn spawn_level(_trigger: Trigger<SpawnLevel>, mut commands: Commands) {
     // but add things like walls etc. here.
     // commands.trigger(SpawnPlayer);
     commands.trigger(SpawnRandomTilemap {
-        width: 50,
-        height: 30,
+        town: Town::new(50, 50, TownType::Island),
     });
 }

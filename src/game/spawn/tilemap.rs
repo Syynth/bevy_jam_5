@@ -1,9 +1,10 @@
 use crate::game::assets::HandleMap;
 use crate::game::assets::ImageKey;
+use crate::game::town::Town;
 use bevy::prelude::*;
 use bevy_ecs_tilemap::prelude::*;
 use bevy_ecs_tilemap::TilemapPlugin;
-use rand::prelude::*;
+// use rand::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
     app.add_plugins(TilemapPlugin);
@@ -12,22 +13,19 @@ pub(super) fn plugin(app: &mut App) {
 
 #[derive(Event, Debug)]
 pub struct SpawnRandomTilemap {
-    pub width: u32,
-    pub height: u32,
+    pub town: Town,
 }
 
 fn spawn_random_tilemap(
     trigger: Trigger<SpawnRandomTilemap>,
     mut commands: Commands,
-    // mut rng: ResMut<GlobalEntropy<ChaCha8Rng>>,
     image_handles: Res<HandleMap<ImageKey>>,
 ) {
-    let mut rng = rand::thread_rng();
-    println!("Spawning random tilemap");
+    // let mut _rng = rand::thread_rng();
     let evt = trigger.event();
-    let x = evt.width;
-    let y = evt.height;
-    println!("x: {:?}, y: {:?}", x, y);
+    let town = &evt.town;
+    let x = town.width;
+    let y = town.height;
 
     let texture_handle: Handle<Image> = image_handles.get(&ImageKey::Tiles).unwrap().clone();
 
@@ -41,9 +39,7 @@ fn spawn_random_tilemap(
                 .spawn(TileBundle {
                     position: tile_pos,
                     tilemap_id: TilemapId(tilemap_entity),
-                    texture_index: TileTextureIndex(
-                        (rng.next_u32() as usize % 6).try_into().unwrap(),
-                    ),
+                    texture_index: town.sample_tile(tile_pos),
                     ..Default::default()
                 })
                 .id();

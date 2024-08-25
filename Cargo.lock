@@ -922,6 +922,7 @@ dependencies = [
  "bevy_egui",
  "bevy_mod_debugdump",
  "bevy_mod_picking",
+ "bevy_pancam",
  "bevy_prng",
  "bevy_rand",
  "iyes_progress",
@@ -1046,6 +1047,15 @@ dependencies = [
  "bevy_utils",
  "bevy_window",
  "crossbeam-channel",
+]
+
+[[package]]
+name = "bevy_pancam"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "535bb673b986f9aa1b2087b14a375ad55307151386d2f52f803acbe62eaff492"
+dependencies = [
+ "bevy",
 ]
 
 [[package]]
