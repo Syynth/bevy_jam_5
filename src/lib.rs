@@ -9,6 +9,7 @@ use bevy::{
     audio::{AudioPlugin, Volume},
     prelude::*,
 };
+use bevy_pancam::PanCam;
 
 pub struct AppPlugin;
 
@@ -35,7 +36,7 @@ impl Plugin for AppPlugin {
                 })
                 .set(WindowPlugin {
                     primary_window: Window {
-                        title: "Bevy Jam 5".to_string(),
+                        title: "gam".to_string(),
                         canvas: Some("#bevy".to_string()),
                         fit_canvas_to_parent: true,
                         prevent_default_event_handling: true,

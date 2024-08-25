@@ -3,7 +3,7 @@
 use bevy::prelude::*;
 use bevy_pancam::PanCamPlugin;
 
-use crate::game::town::{Town, TownType};
+use crate::game::town::Town;
 
 use super::{
     // player::SpawnPlayer,
@@ -23,6 +23,6 @@ fn spawn_level(_trigger: Trigger<SpawnLevel>, mut commands: Commands) {
     // but add things like walls etc. here.
     // commands.trigger(SpawnPlayer);
     commands.trigger(SpawnRandomTilemap {
-        town: Town::new(50, 50, TownType::Island),
+        town: Town::new(45, 45),
     });
 }
