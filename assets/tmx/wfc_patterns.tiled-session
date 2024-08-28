@@ -1,0 +1,31 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "terrain_atlas.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "/Users/syynth/code/rs/bevy_jam_5/assets/images",
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+    ],
+    "project": "wfc_patterns.tiled-project",
+    "recentFiles": [
+        "terrain_atlas.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.transparentColor": "#ffffff",
+    "tileset.useTransparentColor": true
+}

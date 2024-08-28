@@ -23,6 +23,6 @@ fn spawn_level(_trigger: Trigger<SpawnLevel>, mut commands: Commands) {
     // but add things like walls etc. here.
     // commands.trigger(SpawnPlayer);
     commands.trigger(SpawnRandomTilemap {
-        town: Town::new(45, 45),
+        town: Town::new(100, 100),
     });
 }

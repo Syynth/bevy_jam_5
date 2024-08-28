@@ -5,6 +5,14 @@ use rand::prelude::*;
 use generate::generate_river;
 
 mod generate;
+mod types;
+use types::{Acres, TownType};
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Town {
+    IslandTown { size: (Acres, Acres) },
+    MainlandTown { size: (Acres, Acres) },
+}
 
 #[derive(Debug)]
 pub struct Town {
@@ -12,31 +20,11 @@ pub struct Town {
     pub height: u32,
 
     ledge: f32,
-    border_size: u8,
+    border_size: u32,
 
-    town_type: TownType,
+    town_type: types::TownType,
 
     river: Vec<IVec2>,
-}
-
-#[derive(Debug)]
-pub enum TownType {
-    Island,
-    Mainland,
-}
-
-impl TownType {
-    fn sample_border(&self, pos: TilePos) -> TileTextureIndex {
-        match self {
-            TownType::Island => TileTextureIndex(1),
-            TownType::Mainland => {
-                if pos.y < 2 {
-                    return TileTextureIndex(1);
-                }
-                TileTextureIndex(4)
-            }
-        }
-    }
 }
 
 impl Town {
@@ -48,32 +36,49 @@ impl Town {
             TownType::Mainland
         };
         let ledge = rng.gen_range(0.25..0.75);
+        let border_size = width / 10;
         Self {
-            border_size: 2,
+            border_size,
             ledge,
             width,
             height,
             town_type,
-            river: generate_river(width, height, &mut rng),
+            river: generate_river(
+                width.try_into().unwrap(),
+                height.try_into().unwrap(),
+                border_size.try_into().unwrap(),
+                &mut rng,
+            ),
         }
     }
 
-    fn is_sample_in_border(&self, pos: TilePos) -> bool {
-        pos.x < self.border_size as u32
-            || pos.x >= self.width - self.border_size as u32
-            || pos.y < self.border_size as u32
-            || pos.y >= self.height - self.border_size as u32
+    fn distance_to_edge(&self, pos: TilePos) -> f32 {
+        let x = if pos.x < self.width / 2 {
+            pos.x as f32
+        } else {
+            (self.width - pos.x) as f32
+        };
+        let y = if pos.y < self.height / 2 {
+            pos.y as f32
+        } else {
+            (self.height - pos.y - 1) as f32
+        };
+        x.min(y)
     }
 
     pub fn sample_tile(&self, pos: TilePos) -> TileTextureIndex {
         if self.river.contains(&IVec2::new(pos.x as i32, pos.y as i32)) {
             return TileTextureIndex(1);
         }
-        if self.is_sample_in_border(pos) {
+        if self.distance_to_edge(pos) < 10.0 {
             return self.town_type.sample_border(pos);
         }
+        if self.distance_to_edge(pos) < 15.0 {
+            return TileTextureIndex(6);
+        }
 
-        let ledge_index = (self.height as f32 * self.ledge) as u32;
+        let ledge_index =
+            ((self.height - self.border_size * 2) as f32 * self.ledge) as u32 + self.border_size;
 
         if pos.y < ledge_index {
             return TileTextureIndex(2);
