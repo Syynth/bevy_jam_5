@@ -1,14 +1,8 @@
 use bevy_ecs_tilemap::tiles::{TilePos, TileTextureIndex};
+use std::ops::{Deref, DerefMut};
 
-#[derive(Debug, Display, Copy, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub struct Acres(u8);
-
-fn test() {
-    let a1 = Acres(1);
-    let a2 = Acres(2);
-
-    let a3 = a1 + a2;
-}
 
 impl From<u8> for Acres {
     fn from(value: u8) -> Self {
@@ -36,7 +30,7 @@ impl DerefMut for Acres {
     }
 }
 
-#[derive(Debug, Display, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum TownType {
     Island,
     Mainland,

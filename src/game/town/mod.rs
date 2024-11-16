@@ -8,13 +8,13 @@ mod generate;
 mod types;
 use types::{Acres, TownType};
 
-#[derive(Debug, Clone, PartialEq)]
-pub enum Town {
-    IslandTown { size: (Acres, Acres) },
-    MainlandTown { size: (Acres, Acres) },
-}
+// #[derive(Debug, Clone, PartialEq)]
+// pub enum Town {
+//     IslandTown { size: (Acres, Acres) },
+//     MainlandTown { size: (Acres, Acres) },
+// }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Town {
     pub width: u32,
     pub height: u32,
